@@ -8,7 +8,8 @@ public class Extras {
     boolean salir = false;
 
     public void opcionSelection(){
- 
+        boolean caso1 = false;
+        boolean caso2 = false;
         while(!salir){
             System.out.println("**MENU**");
             System.out.println("1. Generar Arreglos aleatorios con diferente tamaño");
@@ -19,16 +20,28 @@ public class Extras {
 
             switch (opcion) {
                 case 1:
-                    mOb.mostrarArreglos();     
+                    mOb.mostrarArreglos();    
+                    caso1 = true; 
                     break;
             
                 case 2:
-                    mOb.mostrarTiempoOrdenamiento();
+                    if(caso1){
+                        mOb.mostrarTiempoOrdenamiento();
+                        caso2 = true;
+                    } else {
+                        System.out.println("Nose puede ordenar arreglos q no existen, generar primero :/");
+                    }
+                    
                     break;
     
                 case 3:
-                    System.out.println("Ingrese el valor a buscar: ");
-                    mOb.realizarBusqueda(leer.nextInt());
+                    if(caso2){
+                        System.out.println("Ingrese el valor a buscar: ");
+                        mOb.realizarBusqueda(leer.nextInt());
+                    } else {
+                        System.out.println("No se puede utilizar el metodo de busqueda en arreglos no ordenados :/");
+                    }
+                    
                     break;
                 
                 case 0:

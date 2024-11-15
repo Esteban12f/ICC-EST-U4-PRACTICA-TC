@@ -178,14 +178,14 @@ public class MetodosOrdBusq {
     public void calcularTiempo(int[] arreglo, String tamañoString){
         long inicio = System.nanoTime();
         long fin = System.nanoTime();
-        double duracion = (fin - inicio) / 0.000000001;
+        double duracion = (fin - inicio) / 1_000_000_000.0;
         System.out.println("Tiempo total de ejecucion en el arreglo de " + tamañoString + " es: " + duracion + " en segundos"); 
     }
 
     public void calcularTiempo(int valorBuscar, String tamañoString, String valor){
         long inicio = System.nanoTime();
         long fin = System.nanoTime();
-        double duracion = (fin - inicio) / 0.000000001;
+        double duracion = (fin - inicio) / 1_000_000_000.0;
         if(Integer.parseInt(valor) == -1){
             System.out.println("Tiempo total de ejecucion en el arreglo de " + tamañoString + " es: " + duracion + " en segundos y el valor no se encuentra en arreglo"); 
         } else {
