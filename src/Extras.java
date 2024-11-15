@@ -16,7 +16,7 @@ public class Extras {
             System.out.println("2. Ordenar por los 3 metodos");
             System.out.println("3. Buscar valores busqueda binaria normal y busqueda binaria recursiva");
             System.out.println("0. Salir");
-            int opcion = leer.nextInt();
+            int opcion = validacion(leer, "Escoja una opcion: ", false);
 
             switch (opcion) {
                 case 1:
@@ -36,8 +36,7 @@ public class Extras {
     
                 case 3:
                     if(caso2){
-                        System.out.println("Ingrese el valor a buscar: ");
-                        mOb.realizarBusqueda(leer.nextInt());
+                        mOb.realizarBusqueda(validacion(leer, "Ingrese el valor a bucar: ", true));
                     } else {
                         System.out.println("No se puede utilizar el metodo de busqueda en arreglos no ordenados :/");
                     }
@@ -56,4 +55,25 @@ public class Extras {
         }
         
     }
+
+    public static int validacion(Scanner leer, String mensaje, boolean permitirNegativos){
+            
+        int arrayLength = 0;
+
+        do{
+            System.out.print(mensaje);
+            while (!leer.hasNextInt()) {
+                System.out.println("Debes ingresar un entero  positivo valido :/");
+                System.out.print(mensaje);
+                leer.next();
+            }
+            arrayLength = leer.nextInt();
+            if (!permitirNegativos && arrayLength < 0){
+                System.out.println("Opcion incorrecta :/");
+            }
+        } while(! permitirNegativos && arrayLength < 0);
+        return arrayLength;
+    
+    }
+
 }
