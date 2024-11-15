@@ -100,19 +100,18 @@ public class MetodosOrdBusq {
             if (arreglo[mid] < valorBuscar) {
                 inicio = mid + 1;
             } else {
-                inicio = mid - 1;
+                fin = mid - 1;
             }
         }
         return -1;
     }
 
     public int searchBinaryRec(int[] arreglo, int valorBuscar, int inicio, int fin){
-
+        if(inicio > fin) return -1;
         int mid = (inicio + fin) / 2;
         if(arreglo[mid] == valorBuscar) return mid;
-        if(inicio > fin) return -1;
-        if(valorBuscar < arreglo[mid]) return searchBinaryRec(arreglo, valorBuscar,inicio,fin);
-        else return searchBinaryRec(arreglo, valorBuscar, inicio, fin);  
+        if(valorBuscar < arreglo[mid]) return searchBinaryRec(arreglo, valorBuscar,inicio,mid -1);
+        else return searchBinaryRec(arreglo, valorBuscar, mid + 1, fin);  
     }
 
 
@@ -179,18 +178,23 @@ public class MetodosOrdBusq {
     public void calcularTiempo(int[] arreglo, String tamañoString){
         long inicio = System.nanoTime();
         long fin = System.nanoTime();
-        long duracion = fin - inicio;
-        System.out.println("Tiempo total de ejecucion en el arreglo de " + tamañoString + " es: " + duracion + " en nanosegundos"); 
+        double duracion = (fin - inicio) / 0.000000001;
+        System.out.println("Tiempo total de ejecucion en el arreglo de " + tamañoString + " es: " + duracion + " en segundos"); 
     }
 
     public void calcularTiempo(int valorBuscar, String tamañoString, String valor){
         long inicio = System.nanoTime();
         long fin = System.nanoTime();
-        long duracion = fin - inicio;
-        System.out.println("Tiempo total de ejecucion en el arreglo de " + tamañoString + " es: " + duracion + " en nanosegundos al buscar el valor de: " + valor); 
+        double duracion = (fin - inicio) / 0.000000001;
+        if(Integer.parseInt(valor) == -1){
+            System.out.println("Tiempo total de ejecucion en el arreglo de " + tamañoString + " es: " + duracion + " en segundos y el valor no se encuentra en arreglo"); 
+        } else {
+            System.out.println("Tiempo total de ejecucion en el arreglo de " + tamañoString + " es: " + duracion + " en segundos y el valor se encuentra en la posicion " + valor); 
+        }
     }
     
     public void realizarBusqueda(int valorBuscar){
+        System.out.println("Tiempos de ejecucion mediante la busqueda Binaria");
         calcularTiempo(searchBinary(tamaño10, valorBuscar), "tamaño 10",
         Integer.toString(searchBinary(tamaño10, valorBuscar)));
         calcularTiempo(searchBinary(tamaño100, valorBuscar), "tamaño 10",
@@ -203,19 +207,22 @@ public class MetodosOrdBusq {
         Integer.toString(searchBinary(tamaño10000, valorBuscar)));
         calcularTiempo(searchBinary(primeArray, valorBuscar), "tamaño 10",
         Integer.toString(searchBinary(primeArray, valorBuscar)));
+        System.out.println("");
 
-        calcularTiempo(searchBinaryRec(tamaño10, valorBuscar, 0, 10), "tamaño 10",
-        Integer.toString(searchBinaryRec(tamaño10, valorBuscar,0 ,10)));
-        calcularTiempo(searchBinaryRec(tamaño100, valorBuscar, 0, 100), "tamaño 10",
-        Integer.toString(searchBinaryRec(tamaño100, valorBuscar, 0, 100)));
-        calcularTiempo(searchBinaryRec(tamaño1000, valorBuscar, 0, 1000), "tamaño 10",
-        Integer.toString(searchBinaryRec(tamaño1000, valorBuscar, 0, 1000)));
-        calcularTiempo(searchBinaryRec(tamaño5000, valorBuscar, 0 , 5000), "tamaño 10",
-        Integer.toString(searchBinaryRec(tamaño5000, valorBuscar, 0, 5000)));
-        calcularTiempo(searchBinaryRec(tamaño10000, valorBuscar,0 , 10000), "tamaño 10",
-        Integer.toString(searchBinaryRec(tamaño10000, valorBuscar, 0, 10000)));
-        calcularTiempo(searchBinaryRec(primeArray, valorBuscar, 0, 30000), "tamaño 10",
-        Integer.toString(searchBinaryRec(primeArray, valorBuscar, 0, 30000)));
+        
+        System.out.println("Tiempos de ejecucion mediante la busqueda Binaria Recursiva");
+        calcularTiempo(searchBinaryRec(tamaño10, valorBuscar, 0, 9), "tamaño 10",
+        Integer.toString(searchBinaryRec(tamaño10, valorBuscar,0 ,9)));
+        calcularTiempo(searchBinaryRec(tamaño100, valorBuscar, 0, 99), "tamaño 10",
+        Integer.toString(searchBinaryRec(tamaño100, valorBuscar, 0, 99)));
+        calcularTiempo(searchBinaryRec(tamaño1000, valorBuscar, 0, 999), "tamaño 10",
+        Integer.toString(searchBinaryRec(tamaño1000, valorBuscar, 0, 999)));
+        calcularTiempo(searchBinaryRec(tamaño5000, valorBuscar, 0 , 4999), "tamaño 10",
+        Integer.toString(searchBinaryRec(tamaño5000, valorBuscar, 0, 4999)));
+        calcularTiempo(searchBinaryRec(tamaño10000, valorBuscar,0 , 9999), "tamaño 10",
+        Integer.toString(searchBinaryRec(tamaño10000, valorBuscar, 0, 9999)));
+        calcularTiempo(searchBinaryRec(primeArray, valorBuscar, 0, 29999), "tamaño 10",
+        Integer.toString(searchBinaryRec(primeArray, valorBuscar, 0, 29999)));
 
 
     }
